@@ -3,6 +3,7 @@ local weapon = {};
 weapon.__index = weapon;
 
 local fastCast = require(script.Parent.FastCastRedux);
+local item = require(script.Parent.Item);
 
 local function fireAttachmentExists(accessory)
     local parts = accessory.model:GetDescendants();
@@ -17,13 +18,12 @@ end
 
 --Create new weapon
 function weapon.new(weaponName, damage, ammo, debounceTime, reloadTime, model, maximumDistance, bulletSpeed)
-    local self = {};
-    setmetatable(self, weapon);
-
     assert(fireAttachmentExists(model), "[Weapon Class] Model doesn't have FireAttachment.")
 
+    local self = item.new(weaponName, model, 1);
+    setmetatable(self, weapon);
+
     --Assign attributes
-    self.name = weaponName;
     self.damage = damage;
     self.maxAmmo = ammo;
     self.ammo = ammo;
@@ -31,7 +31,6 @@ function weapon.new(weaponName, damage, ammo, debounceTime, reloadTime, model, m
     self.cooldown = debounceTime;
     self.reloading = false;
     self.reloadTime = reloadTime;
-    self.model = model:Clone();
     self.fireAttachment = fireAttachmentExists(model);
 
     self._castBehavior = fastCast.newBehavior();
@@ -90,12 +89,9 @@ function weapon:fireDebounce()
 end
 
 function weapon:Destroy()
-    --Clear model
-    self.model:Destroy();
-    self.model = nil;
+    item.Destroy(self);
 
     --Clear other attributes
-    self.name = nil;
     self.damage = nil;
     self.maxAmmo = nil;
     self.ammo = nil;
