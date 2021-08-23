@@ -6,6 +6,11 @@ local camera = workspace.CurrentCamera -- Camera object
 local player = game.Players.LocalPlayer -- Player objects
 
 local CAMERA_OFFSET = Vector3.new(-1, 90, 0) -- Constant used to set offset of the camera from the player
+
+while camera.CameraSubject == nil do
+	wait()
+end
+
 camera.CameraType = Enum.CameraType.Scriptable
 
 local function onRenderStep()
