@@ -26,6 +26,7 @@ function playerModule.new(player)
     --Logic for the weapon system
     self.caster = fastCast.new();
     self.weapon = nil;
+    self.inventory = {};
 
     return self;
 end
