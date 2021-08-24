@@ -6,6 +6,7 @@ function item.new(itemName, model, maxStackSize)
     setmetatable(self, item);
 
     self.name = itemName;
+    self.type = 'item';
     self.model = model:Clone();
     self.maxStackSize = maxStackSize;
     self.stackSize = 0;
@@ -15,6 +16,7 @@ end
 function item:Destroy()
     --Clear attributes and then clear metatable.
     self.name = nil;
+    self.type = nil;
     self.maxStackSize = nil;
     self.stackSize = nil;
 
