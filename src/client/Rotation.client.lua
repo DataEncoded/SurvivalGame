@@ -50,6 +50,5 @@ run.RenderStepped:Connect(function()
 		--Update attachment position
 
 		attachment1.CFrame = finalAngle
-		attachment1.WorldOrientation = Vector3.new(attachment1.WorldOrientation.X, attachment1.WorldOrientation.Y, attachment1.WorldOrientation.Z)
 	end
 end)
