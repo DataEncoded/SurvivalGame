@@ -9,6 +9,8 @@ local character = nil;
 local align, attachment0, attachment1;
 local humanoidRootPart;
 
+attachment1 = Instance.new("Attachment")
+
 local characterConnection = player.CharacterAdded:Connect(function(c)
 	--Create attachment when new player added
 	character = c;
@@ -19,8 +21,6 @@ local characterConnection = player.CharacterAdded:Connect(function(c)
 	align.PrimaryAxisOnly = true
 
 	attachment0 = Instance.new("Attachment")
-
-	attachment1 = Instance.new("Attachment")
 
 	align.Attachment0 = attachment0
 	align.Attachment1 = attachment1
