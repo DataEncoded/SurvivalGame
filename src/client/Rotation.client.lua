@@ -10,6 +10,7 @@ local align, attachment0, attachment1;
 local humanoidRootPart;
 
 attachment1 = Instance.new("Attachment")
+attachment1.Parent = workspace.Terrain
 
 local characterConnection = player.CharacterAdded:Connect(function(c)
 	--Create attachment when new player added
@@ -30,7 +31,6 @@ local characterConnection = player.CharacterAdded:Connect(function(c)
 
 	--Create attachment parents to where stuff will be moved
 	attachment0.Parent = humanoidRootPart
-	attachment1.Parent = workspace.Terrain
 	align.Parent = humanoidRootPart
 
 
