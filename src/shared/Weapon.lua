@@ -6,10 +6,10 @@ local fastCast = require(script.Parent.FastCastRedux);
 local item = require(script.Parent.Item);
 
 local function fireAttachmentExists(accessory)
-    local parts = accessory.model:GetDescendants();
+    local parts = accessory:GetDescendants();
 
     for _, part in ipairs(parts) do
-        if part:IsA("Accessory") and part.Name == "FireAttachment" then
+        if part:IsA("Attachment") and part.Name == "FireAttachment" then
             return part;
         end
     end
@@ -42,6 +42,14 @@ function weapon.new(weaponName, damage, ammo, debounceTime, reloadTime, model, m
     return self;
 end
 
+function weapon:equip(humanoid)
+    humanoid:AddAccessory(self.model);
+end
+
+function weapon:unequip()
+    self.reloading = false;
+    self.model.Parent = nil;
+end
 
 function weapon:reload()
     coroutine.wrap(function() --Create and run coroutine
@@ -102,6 +110,8 @@ function weapon:Destroy()
     self.reloadingRoute = nil;
     self._castBehavior = nil;
     self.speed = nil;
+    self.fireAttachment:Destroy();
+    self.fireAttachment = nil;
 
 
     --Unset metatable

@@ -33,24 +33,38 @@ function playerModule.new(player)
 
     --Logic for the weapon system
     self.caster = fastCast.new();
-    self.weapon = nil;
+    self.currentItem = nil;
     self.inventory = {};
 
     return self;
 end
 
+function playerModule:equipItem(item)
+    assert(item and item.type == "item", "[Player Class] Equip item function must have an actual item given.")
+    local humanoid =  self.character:FindFirstChild("Humanoid");
+
+    assert(humanoid, "[Player Class] Player must have a humanoid to equip an item.");
+
+    for _, v in ipairs(self.inventory) do
+        if v == item then
+            --Item found, equip
+            v:equip(humanoid);
+            self.currentItem = v;
+        end
+    end
+
+end
+
 function playerModule:addItem(item) --Wrapper add and delete function for adding items to inventory
     assert(item and item.type == "item", "[Player Class] Add item function must have an actual item given.")
 
-    if #self.inventory > 5 then
+    if #self.inventory < 5 then
         item.model.Parent = ReplicatedStorage;
 
         table.insert(self.inventory, 1, item);
     end
 
 end
-
-
 
 function playerModule:dropItem(item)
     assert(item and item.type == "item", "[Player Class] Drop item function must have an actual item given.")
@@ -107,11 +121,7 @@ function playerModule:Destroy()
 
     self.raycastParms = nil;
 
-    if self.weapon then
-        self.weapon:Destroy();
-    end
-
-    self.weapon = nil;
+    self.currentItem = nil;
 
     for i, v in ipairs(self.inventory) do
        v:Destroy();

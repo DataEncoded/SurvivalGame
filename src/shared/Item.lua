@@ -11,6 +11,7 @@ function item.new(itemName, model, maxStackSize)
     self.maxStackSize = maxStackSize;
     self.stackSize = 0;
 
+    return self;
 end
 
 function item:Destroy()

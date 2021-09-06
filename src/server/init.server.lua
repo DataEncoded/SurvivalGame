@@ -1,9 +1,9 @@
 print("Hello world, from server!")
 
 local Players = game:GetService("Players");
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Player = require(ReplicatedStorage.Common.Player)
-
+local ReplicatedStorage = game:GetService("ReplicatedStorage");
+local Player = require(ReplicatedStorage.Common.Player);
+local Weapon = require(ReplicatedStorage.Common.Weapon);
 
 --Logic for when a new player joins
 local players = {};
