@@ -94,4 +94,34 @@ function playerModule:playerClicked(hit) --Custom click logic for psuedotool. Hi
     end
 end
 
+function playerModule:Destroy()
+    
+    self.player = nil;
+    self.character = nil;
+    self.raycastParams = nil;
+
+    self.characterConnection:Disconnect();
+    self.characterConnection = nil;
+
+    self.caster = nil; --Apparently this should be garbage collected according to eti
+
+    self.raycastParms = nil;
+
+    if self.weapon then
+        self.weapon:Destroy();
+    end
+
+    self.weapon = nil;
+
+    for i, v in ipairs(self.inventory) do
+       v:Destroy();
+       self.inventory[i] = nil; 
+    end
+
+    self.inventory = nil;
+
+    setmetatable(self, nil);
+
+end
+
 return playerModule;

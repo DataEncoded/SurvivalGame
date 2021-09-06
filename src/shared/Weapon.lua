@@ -50,7 +50,7 @@ function weapon:reload()
 
             for _ = 1, self.reloadingTime * 50 do
                 if self.reloading then
-                    wait(0.05); --Run 50 times every second to determine if reloading has stopped. 
+                    task.wait(0.05); --Run 50 times every second to determine if reloading has stopped. 
                 else
                     return;
                 end
