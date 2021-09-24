@@ -2,8 +2,9 @@
 local weapon = {};
 weapon.__index = weapon;
 
-local fastCast = require(script.Parent.FastCastRedux);
-local item = require(script.Parent.Item);
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local fastCast = require(ReplicatedStorage.Common.FastCastRedux);
+local item = require(script.Parent.ServerItem);
 
 local function fireAttachmentExists(accessory)
     local parts = accessory:GetDescendants();

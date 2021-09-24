@@ -2,9 +2,8 @@
 local playerModule = {};
 playerModule.__index = playerModule;
 
-local fastCast = require(script.Parent.FastCastRedux);
-local weaponModule = require(script.Parent.Weapon);
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local fastCast = require(ReplicatedStorage.Common.FastCastRedux);
 
 function playerModule.new(player)
 
