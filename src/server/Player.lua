@@ -104,7 +104,7 @@ function playerModule:playerClicked(hit) --Custom click logic for psuedotool. Hi
     if self.weapon then
         local newHitPosition = Vector3.new(hit.p.X, self.weapon.fireAttachment.WorldPosition.Y, hit.p.Z);
 
-        self.weapon:fire(newHitPosition, self.caster);
+        self.weapon:fire(newHitPosition, self.caster, self.raycastParms);
     end
 end
 

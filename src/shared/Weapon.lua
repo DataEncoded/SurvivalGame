@@ -78,7 +78,11 @@ function weapon:fire(firePosition, caster)
         local fireAttachment = self.fireAttachment.WorldPosition;
         local direction = (firePosition - fireAttachment).Unit;
         --Use fast cast to cast.
-        caster:Fire(fireAttachment, direction, self.speed, self._castBehavior);
+        caster:Fire(fireAttachment, direction, self.speed, self._castBehavior)
+
+        --Remove raycast params from cast behavior
+        self._castBehavior.RaycastParams = nil;
+
         --Post gun fire logic
         self.ammo -= 1;
         self:fireDebounce();
