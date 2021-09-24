@@ -78,7 +78,7 @@ function playerModule:dropItem(item)
                 error("[PlayerModule] Player attempted to drop an item without a HumanoidRootPart, escaping.")
             end
             --Raycast below player to see where to drop
-            local rayResult = workspace:Raycast(self.Character.HumanoidRootPart.Position, (self.Character.HumanoidRootPart.Position - Vector3(0,1,0)).Unit, self.raycastParams);
+            local rayResult = workspace:Raycast(self.Character.HumanoidRootPart.Position, (self.Character.HumanoidRootPart.Position - Vector3(0,1,0)).Unit);
 
             local dropPosition;
 
