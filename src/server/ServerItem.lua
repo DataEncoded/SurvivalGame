@@ -19,7 +19,7 @@ function server.new(itemName, model, maxStackSize)
     local GUID;
 
     while not GUID or itemTable[GUID] do
-        GUID = HttpService:GenerateGUID();
+        GUID = HttpService:GenerateGUID(false);
     end
 
     self.GUID = GUID;

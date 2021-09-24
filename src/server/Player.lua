@@ -2,7 +2,9 @@
 local playerModule = {};
 playerModule.__index = playerModule;
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ReplicatedStorage = game:GetService("ReplicatedStorage");
+local remotes = ReplicatedStorage.Remotes;
+local newWeaponRemote = remotes.NewWeapon;
 local fastCast = require(ReplicatedStorage.Common.FastCastRedux);
 
 function playerModule.new(player)
@@ -59,6 +61,8 @@ function playerModule:addItem(item) --Wrapper add and delete function for adding
 
     if #self.inventory < 5 then
         item.model.Parent = ReplicatedStorage;
+
+        newWeaponRemote:FireClient(self.player, item.Name, item.GUID);
 
         table.insert(self.inventory, 1, item);
     end
