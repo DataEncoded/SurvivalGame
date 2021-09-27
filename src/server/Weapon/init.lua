@@ -25,6 +25,7 @@ function weapon.new(weaponName, damage, ammo, debounceTime, reloadTime, model, m
     setmetatable(self, weapon);
 
     --Assign attributes
+    self.itemType = "Weapon";
     self.damage = damage;
     self.maxAmmo = ammo;
     self.ammo = ammo;

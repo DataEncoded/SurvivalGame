@@ -5,6 +5,7 @@ local ServerScriptService = game:GetService("ServerScriptService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage");
 local remotes = ReplicatedStorage.Remotes;
 local getAmmo = remotes.GetAmmo;
+local shoot = remotes.Shoot
 local Player = require(script.Player);
 local Weapon = require(script.Weapon);
 local serverItem = require(script.ServerItem);
@@ -42,3 +43,10 @@ local playerLeftConnection = Players.PlayerRemoving:Connect(function(p)
     players[p] = nil;
 end)
 
+local shootConnection = shoot.OnServerEvent:Connect(function(player, hitPos)
+    if player and players[player] and players[player]["currentItem"] and hitPos and typeof(hitPos) == "Vector3" then
+
+        players[player]:playerClicked(hitPos);
+
+    end
+end)

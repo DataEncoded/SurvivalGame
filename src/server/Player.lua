@@ -103,11 +103,11 @@ function playerModule:dropItem(item)
 
 end
 
-function playerModule:playerClicked(hit) --Custom click logic for psuedotool. Hit is a CFrame
-    if self.weapon then
-        local newHitPosition = Vector3.new(hit.p.X, self.weapon.fireAttachment.WorldPosition.Y, hit.p.Z);
+function playerModule:playerClicked(hitPosition) --Custom click logic for psuedotool. Hit is a vector3
+    if self.currentItem and self.currentItem.itemType == "Weapon" then
+        local newHitPosition = Vector3.new(hitPosition.X, self.currentItem.fireAttachment.WorldPosition.Y, hitPosition.Z);
 
-        self.weapon:fire(newHitPosition, self.caster, self.raycastParms);
+        self.currentItem:fire(newHitPosition, self.caster);
     end
 end
 
