@@ -21,7 +21,7 @@ UserInputService.InputBegan:Connect(function (input, gpe)
 
 
         local mouseLocation = UserInputService:GetMouseLocation()
-        local ray = camera:ScreenPointToRay(mouseLocation.X, mouseLocation.Y)
+        local ray = camera:ViewportPointToRay(mouseLocation.X, mouseLocation.Y)
         local raycast = workspace:Raycast(ray.Origin, ray.Direction * 100)
 
         --[[if raycast then

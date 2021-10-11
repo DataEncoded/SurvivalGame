@@ -6,6 +6,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage");
 local remotes = ReplicatedStorage.Remotes;
 local newWeaponRemote = remotes.NewWeapon;
 local fastCast = require(ReplicatedStorage.Common.FastCastRedux);
+fastCast.VisualizeCasts = true;
 
 function playerModule.new(player)
 
@@ -31,9 +32,16 @@ function playerModule.new(player)
         self.raycastParms.FilterDescendantsInstances = {self.character}
     end)
 
+    local function rayHit(...)
+        print(table.pack(...)[2])
+        if self.currentItem and self.currentItem.RayHit then
+            self.currentItem.RayHit(...)
+        end
+    end
 
     --Logic for the weapon system
     self.caster = fastCast.new();
+    self.rayConnection = self.caster.RayHit:Connect(rayHit);
     self.currentItem = nil;
     self.inventory = {};
 
@@ -119,6 +127,8 @@ function playerModule:Destroy()
 
     self.characterConnection:Disconnect();
     self.characterConnection = nil;
+
+    self.rayConnection:Disconnect();
 
     self.caster = nil; --Apparently this should be garbage collected according to eti
 

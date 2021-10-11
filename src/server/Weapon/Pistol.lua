@@ -6,7 +6,7 @@ local WeaponModels = ServerStorage.Weapons;
 
 function constructor.new()
     --weaponName, damage, ammo, debounceTime, reloadTime, model, maximumDistance, bulletSpeed
-    return Weapon.new("Pistol", 15, 10, 0.1, 1, WeaponModels.Pistol, 100, 1)
+    return Weapon.new("Pistol", 15, 10, 0.1, 1, WeaponModels.Pistol, 100, 300)
 end
 
 return constructor;

@@ -34,7 +34,6 @@ local playerJoinedConnection = Players.PlayerAdded:Connect(function(p)
 
     player:addItem(pistol);
     player:equipItem(pistol);
-    print(pistol)
 
 end);
 

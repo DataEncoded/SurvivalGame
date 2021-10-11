@@ -4,6 +4,7 @@ weapon.__index = weapon;
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local fastCast = require(ReplicatedStorage.Common.FastCastRedux);
+fastCast.VisualizeCasts = true;
 local item = require(script.Parent.ServerItem);
 
 local function fireAttachmentExists(accessory)
@@ -33,10 +34,10 @@ function weapon.new(weaponName, damage, ammo, debounceTime, reloadTime, model, m
     self.cooldown = debounceTime;
     self.reloading = false;
     self.reloadTime = reloadTime;
-    self.fireAttachment = fireAttachmentExists(model);
+    self.fireAttachment = fireAttachmentExists(self.model);
 
     self._castBehavior = fastCast.newBehavior();
-    self._castBehavior.Acceleration = Vector3.new(0, -workspace.Gravity, 0);
+    self._castBehavior.Acceleration = Vector3.new();
     self._castBehavior.AutoIgnoreContainer = true;
     self._castBehavior.MaxDistance = maximumDistance;
     self.speed = bulletSpeed;
@@ -74,13 +75,16 @@ function weapon:reload()
     end)();
 end
 
+
+
+
 function weapon:fire(firePosition, caster)
     if not self.reloading and not self._debounce and self.ammo > 0 then
         --Figure out the angle and start of the raycast.
         local fireAttachment = self.fireAttachment.WorldPosition;
         local direction = (firePosition - fireAttachment).Unit;
         --Use fast cast to cast.
-        caster:Fire(fireAttachment, direction, self.speed, self._castBehavior);
+        caster:Fire(fireAttachment, direction, self.speed, self._castBehavior); --Multiply the direction here? Unsure since fastcast has maximumDistance parameter in castbehavior
         --Post gun fire logic
         self.ammo -= 1;
         self:fireDebounce();
